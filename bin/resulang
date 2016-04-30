@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'resulang'
+require 'resulang/exec'
+
+Resulang::Exec.start(ARGV)

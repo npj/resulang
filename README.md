@@ -5,7 +5,7 @@ create other kinds of documents with structured data. It works by separating
 the data from the html template, which means the data could theoretically be
 used to generate other kinds of output in the future, not just html.
 
-## TODO: write tests and publish gem
+## TODO: write tests
 
 ## Installation
 

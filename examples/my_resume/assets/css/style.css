@@ -1,0 +1,11 @@
+body {
+  font-family: 'verdana';
+  font-size: 10pt;
+}
+
+.section {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  background-color: #eee;
+}

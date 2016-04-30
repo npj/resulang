@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <title><%= sections[:personal].name %></title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <div class="section">
+      <%= render_section(:personal) %>
+    </div>
+    <div class="section">
+      <%= render_section(:background) %>
+    </div>
+    <div class="section">
+      <%= render_section(:skills) %>
+    </div>
+    <div class="section">
+      <%= render_section(:hobbies) %>
+    </div>
+  </body>
+</html>
+

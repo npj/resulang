@@ -1,6 +1,6 @@
 # Resulang
 
-Resulang a simple DSL to help create html resumes. It can also be used to
+Resulang is a simple DSL to help create html resumes. It can also be used to
 create other kinds of documents with structured data. It works by separating
 the data from the html template, which means the data could theoretically be
 used to generate other kinds of output in the future, not just html.
@@ -118,7 +118,7 @@ class Personal < Resulang::Section
 end
 ```
 
-```
+```ruby
 # my_resume/data/sections/hobbies.rb
 class Hobbies < Resulang::Section
   pointlist :info

@@ -7,8 +7,8 @@ Gem::Specification.new do |spec|
   spec.name          = "resulang"
   spec.version       = Resulang::VERSION
   spec.authors       = ["Peter Brindisi"]
-  spec.email         = ["peter.brindisi@gmail.com"]
-  spec.summary       = %q{Resulang is a DSL for generating HTML resumes from ERB templates.}
+  spec.email         = ["peter.brindisi+resulang@gmail.com"]
+  spec.summary       = %q{Resulang is a simple DSL to help create html resumes.}
   spec.homepage      = "https://github.com/npj/resulang"
   spec.license       = "MIT"
 

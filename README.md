@@ -20,13 +20,12 @@ resulang new my_resume
 
 This will generate the basic structure of a resulang app as well as a few key files:
 
-* `my_resume/data/resume.rb`
+  * `my_resume/data/resume.rb`
+    This is where you define your resume.
 
-    This is where you define your resume. 
-
-* `my_resume/templates/resume.html.erb`
-
-    This is where you write your resume html which has access to the data in my_resume/data/resume.rb
+  * `my_resume/templates/resume.html.erb`
+    This is where you write your resume html which has access to the data in
+    my_resume/data/resume.rb
 
 
  A resume is broken into named sections. For example:
@@ -84,7 +83,8 @@ A template for the above data might look like this:
 
 `render_section(:section_name)` looks for a template partial named
 `my_resume/templates/_section_name.html.erb`. A partial has direct access to
-the data within the data section. For example, the partial for the "personal" and "hobbies" sections might look like:
+the data within the data section. For example, the partial for the "personal"
+and "hobbies" sections might look like:
 
 ```html
 <!-- my_resume/templates/_personal.html.erb -->
@@ -125,14 +125,18 @@ class Hobbies < Resulang::Section
 end
 ```
 
-To easily view changes to the resume as you make them, you can run a local server with:
+To easily view changes to the resume as you make them, you can run a local
+server with:
 ```sh
 resulang server
 ```
 
-However, if you make any changes to the classes in `my_resume/data/sections` you must restart the server.
+However, if you make any changes to the classes in `my_resume/data/sections`
+you must restart the server.
 
-You can put assets like images and stylesheets in directories off `my_resume`, like `css` and `images` or `assets/css` and `assets/images'. These can be referenced in `resume.html.erb`.
+You can put assets like images and stylesheets in directories off `my_resume`,
+like `css` and `images` or `assets/css` and `assets/images`. These can be
+referenced in `resume.html.erb`.
 
 To generate a static html page, run:
 ```sh
@@ -142,4 +146,3 @@ resulang make
 This will output `./resume.html`
 
 Please see the `exmaples` directory of this project for a working example.
-

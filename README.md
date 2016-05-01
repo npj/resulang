@@ -20,15 +20,17 @@ resulang new my_resume
 
 This will generate the basic structure of a resulang app as well as a few key files:
 
-  * `my_resume/data/resume.rb`
+* `my_resume/data/resume.rb`
+    
     This is where you define your resume.
 
-  * `my_resume/templates/resume.html.erb`
+* `my_resume/templates/resume.html.erb`
+
     This is where you write your resume html which has access to the data in
-    my_resume/data/resume.rb
+my_resume/data/resume.rb
 
 
- A resume is broken into named sections. For example:
+A resume is broken into named sections. For example:
 ```ruby
   personal do
     name 'Peter Brindisi'

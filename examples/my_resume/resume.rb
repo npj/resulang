@@ -14,7 +14,13 @@ structure do
   end
 
   section :hobbies do
-    pointlist :info
+    list :points
+  end
+
+  section :other do
+    list :things do
+      string :name, :description
+    end
   end
 end
 
@@ -33,14 +39,29 @@ data do
   end
 
   skills do
-    things %{foo bar baz qux}
+    thing %{foo bar baz qux}
   end
 
   hobbies do
-    info do
-      point 'Reading about Haskell'
-      point 'Evangelizing monads'
-      point 'Making beer'
+    point 'Reading about Haskell'
+    point 'Evangelizing monads'
+    point 'Making beer'
+  end
+
+  other do
+    thing do
+      name 'foo'
+      description 'foo desc'
+    end
+
+    thing do
+      name 'bar'
+      description 'bar desc'
+    end
+
+    thing do
+      name 'baz'
+      description 'baz desc'
     end
   end
 end

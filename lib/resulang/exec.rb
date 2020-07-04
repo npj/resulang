@@ -1,5 +1,4 @@
 require 'thor'
-require 'active_support/inflector'
 
 module Resulang
   class Exec < Thor

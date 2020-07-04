@@ -1,3 +1,5 @@
+require 'active_support/inflector'
+
 module Resulang
   module Fields
     def self.included(base)
@@ -8,24 +10,6 @@ module Resulang
     end
 
     class Link < String
-    end
-
-    class PointList
-      attr_reader :points
-
-      def initialize(string: nil, &block)
-        @string = string
-        @points = [ ]
-        instance_eval(&block) if block
-      end
-
-      def point(string, &block)
-        points.push(PointList.new(string: string, &block))
-      end
-
-      def to_s
-        @string
-      end
     end
 
     module ClassMethods
@@ -41,16 +25,34 @@ module Resulang
         fields(*attrs) { |value| Link.new(value) }
       end
 
-      protected def list(*attrs)
-        fields(*attrs) { |value| Array(value) }
+      protected def list(*attrs, &item_decl)
+        attrs.each do |name|
+          define_method(name) do |*args, &block|
+            field_get(name)
+          end
+
+          singular = ActiveSupport::Inflector.singularize(name)
+
+          define_method(singular) do |*args, &item_def|
+            if args.empty? && item_def.nil?
+              raise "no arguments or definition block given for list #{singular}"
+            end
+
+            items = field_get(name) || []
+
+            if item_def.nil?
+              args.each { |a| items.push(a) }
+            elsif
+              items.push(Class.new(Section, &item_decl).new(name: name, &item_def))
+            end
+
+            field_set(name, items)
+          end
+        end
       end
 
       protected def range(*attrs)
         fields(*attrs) { |*values| (values.first..values.last) }
-      end
-
-      protected def pointlist(*attrs)
-        fields(*attrs) { |&block| PointList.new(&block) }
       end
 
       private def fields(*names, &block)

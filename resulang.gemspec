@@ -19,10 +19,10 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "thor",               "~> 0.19.1"
   spec.add_dependency "activesupport",      "~> 4.2.6"
-  spec.add_dependency "rack",               "~> 1.6.4"
+  spec.add_dependency "rack",               "~> 2.1.4"
   spec.add_dependency "mime-types",         "~> 3.0"
 
   spec.add_development_dependency "bundler", "~> 2.1.4"
-  spec.add_development_dependency "rake",    "~> 10.0"
+  spec.add_development_dependency "rake",    "~> 12.3.3"
   spec.add_development_dependency "rspec",   "~> 3.4.0"
 end

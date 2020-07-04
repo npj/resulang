@@ -11,24 +11,26 @@ module Resulang
       empty_directory(name)
       inside(name) do
         create_file "server.ru" do
-          <<-SERVER
-            require "resulang/server"
-            run Resulang::Server
-          SERVER
+          contents = [
+            %Q{require "resulang/server"},
+            %Q{run Resulang::Server}
+          ]
+          contents.join("\n")
         end
 
-        empty_directory('data')
-        inside('data') do
-          create_file('resume.rb') do
-            options[:sections].inject([]) { |list, s| list.push("#{s} do\n\nend") }.join("\n\n")
+        create_file('resume.rb') do
+          declarations = options[:sections].inject([]) do |list, s|
+            list.push("section(:#{s}) do\n\n  end")
           end
 
-          empty_directory('sections')
-          inside('sections') do
-            options[:sections].each do |s|
-              create_file("#{s}.rb", "class #{ActiveSupport::Inflector.camelize(s)} < Resulang::Section\n\nend")
-            end
+          sections = options[:sections].inject([]) do |list, s|
+            list.push("#{s} do\n\n  end")
           end
+
+          structure = "structure do\n  " + declarations.join("  \n\n  ") + "\nend"
+          data = "data do\n  " + sections.join(" \n\n  ") + "\nend"
+
+          structure + "\n\n" + data
         end
 
         empty_directory 'templates'

@@ -1,2 +1,2 @@
-            require "resulang/server"
-            run Resulang::Server
+require "resulang/server"
+run Resulang::Server

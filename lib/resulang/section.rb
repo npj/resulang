@@ -2,14 +2,13 @@ require 'active_support/inflector'
 
 module Resulang
   class Section
+    attr_reader :name
+
     include Fields
     include Rendering
 
-    def self.inherited(subclass)
-      Resulang::Dsl.register_section!(ActiveSupport::Inflector.underscore(subclass.name), subclass)
-    end
-
-    def initialize(&block)
+    def initialize(name:, &block)
+      @name = name
       instance_eval(&block)
     end
 

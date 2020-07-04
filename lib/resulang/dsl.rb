@@ -1,31 +1,32 @@
 module Resulang
   class Dsl
-    attr_reader :path
-
-    def self.register_section!(section, klass)
-      define_section_method(section, klass)
-    end
+    attr_reader :path, :resume
 
     def initialize(path)
-      @path    = path
-      @resume = Resume.new
-    end
-
-    def resume
-      unless @evaluated
-        instance_eval(File.read(path))
-        @evaluated = true
-      end
-
-      @resume
+      @resume = nil
+      @path   = path
+      instance_eval(File.read(path))
     end
 
     private
 
-      def self.define_section_method(section, klass)
-        define_method(section) do |&block|
-          @resume.sections[section.to_sym] = klass.new(&block)
+      # defines the sections and their typed fields
+      class Structure
+        def initialize(&block)
+          instance_eval(&block)
         end
+
+        def section(name, &block)
+          Resume.declare_section!(name, &block)
+        end
+      end
+
+      def structure(&block)
+        Structure.new(&block)
+      end
+
+      def data(&block)
+        @resume = Resume.new(&block)
       end
   end
 end

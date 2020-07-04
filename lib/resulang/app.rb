@@ -44,32 +44,19 @@ module Resulang
     private
 
       def load_app
-        unless File.directory?('data') && File.directory?('templates')
-          raise "no Resulang app found at #{path.inspect}"
+        unless File.directory?('templates')
+          raise "no Resulang app found at #{path.inspect}: 'templates' directory not found."
         end
 
-        load_sections
         load_resume
-      end
-
-      def load_sections
-        section_paths.each { |section| require section }
       end
 
       def load_resume
         @resume = Resulang::Dsl.new(resume_path).resume
       end
 
-      def sections_dir
-        File.join(path, 'data', 'sections')
-      end
-
-      def section_paths
-        Dir[File.join(sections_dir, '**', '*.rb')]
-      end
-
       def resume_path
-        File.join(path, 'data', 'resume.rb')
+        File.join(path, 'resume.rb')
       end
   end
 end

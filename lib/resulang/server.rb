@@ -23,7 +23,7 @@ module Resulang
     def self.serve_html
       html = app.processor(output: nil, format: :html).process
       headers = {
-        'Content-Type'   => 'text/html'
+        'Content-Type' => 'text/html'
       }
       [200, headers, [html]]
     end

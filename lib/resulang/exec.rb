@@ -17,28 +17,36 @@ module Resulang
           contents.join("\n")
         end
 
-        create_file('resume.rb') do
-          declarations = options[:sections].inject([]) do |list, s|
-            list.push("section(:#{s}) do\n\n  end")
-          end
+        create_file('resume.yaml') do
+          options[:sections].inject([]) do |list, s|
+            list.push("#{s}:")
+          end.join("\n\n")
+        end
 
-          sections = options[:sections].inject([]) do |list, s|
-            list.push("#{s} do\n\n  end")
-          end
-
-          structure = "structure do\n  " + declarations.join("  \n\n  ") + "\nend"
-          data = "data do\n  " + sections.join(" \n\n  ") + "\nend"
-
-          structure + "\n\n" + data
+        empty_directory 'css'
+        inside('css') do
+          create_file('style.css')
         end
 
         empty_directory 'templates'
         inside('templates') do
-          create_file('resume.html.erb')
+          create_file('resume.html.erb') do
+            <<-HTML
+<html>
+  <head>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    #{options[:sections].map { |section| %Q{<div class="section"><%= render_section(:#{section}) %></div>} }.join("\n    ")}
+  </body>
+</html>
+            HTML
+          end
           options[:sections].each do |s|
             create_file("_#{s}.html.erb")
           end
         end
+
       end
     end
 

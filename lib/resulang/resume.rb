@@ -1,22 +1,17 @@
+require 'psych'
+
 module Resulang
   class Resume
-    @@declared_sections = { }
-
     attr_reader :sections
 
-    def initialize(&block)
-      @sections = { }
-      instance_eval(&block)
+    def initialize(path:)
+      @sections = OpenStruct.new
+      load_yaml(path)
     end
 
-    def self.declare_section!(name, &declaration_block)
-      @@declared_sections[name] = Class.new(Section, &declaration_block)
-
-      define_method(name) do |&instance_block|
-        unless @@declared_sections[name]
-          raise "Section \"#{name}\" not found"
-        end
-        @sections[name] = @@declared_sections[name].new(name: name, &instance_block)
+    private def load_yaml(path)
+      Psych.load_file(path).each do |section_name, section_data|
+        @sections[section_name] = Section.new(name: section_name, data: section_data)
       end
     end
   end

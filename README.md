@@ -1,6 +1,6 @@
 # Resulang
 
-Resulang is a simple DSL to help create html resumes. It can also be used to
+Resulang is a simple tool for creating html resumes. It can also be used to
 create other kinds of documents with structured data. It works by separating
 the data from the html template, which means the data could theoretically be
 used to generate other kinds of output in the future, not just html.
@@ -15,47 +15,41 @@ used to generate other kinds of output in the future, not just html.
 
 Once resulang is installed, create a new resulang app with:
 ```sh
-resulang new my_resume
+bundle exec resulang new my_resume --section one two three
 ```
 
 This will generate the basic structure of a resulang app as well as a few key files:
 
-* `my_resume/data/resume.rb`
+* `my_resume/data/resume.yaml`
     
     This is where you define your resume.
 
 * `my_resume/templates/resume.html.erb`
 
     This is where you write your resume html which has access to the data in
-my_resume/data/resume.rb
+my_resume/data/resume.yaml
 
 
 A resume is broken into named sections. For example:
-```ruby
-  personal do
-    name 'Peter Brindisi'
-    phone '555-555-5555'
-    email 'superduperprivate@example.com'
-    github 'https://github.com/npj'
-  end
+```yaml
+  personal:
+    name: Peter Brindisi
+    phone: 555-555-5555
+    email: superduperprivate@example.com
+    github: https://github.com/npj
 
-  background do
-    description <<-DESCRIPTION
+  background:
+    description: >-
       I am a guy that does things. Things are awesome and they are also cool.
-    DESCRIPTION
-  end
 
-  skills do
-    things %{foo bar baz qux}
-  end
+  skills:
+    things: ['foo', 'bar', 'baz', 'qux']
 
-  hobbies do
-    info do
-      point 'Reading about Haskell'
-      point 'Evangelizing monads'
-      point 'Making beer'
-    end
-  end
+  hobbies:
+    points:
+      - Reading about Haskell
+      - Evangelizing monads
+      - Making beer
 ```
 
 A template for the above data might look like this:
@@ -63,8 +57,8 @@ A template for the above data might look like this:
 ```html
 <html>
   <head>
-    <title><%= sections[:personal].name %></title>
-    <link rel="stylesheet" href="assets/css/style.css" />
+    <title><%= sections.personal.name %></title>
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <div class="section">
@@ -99,42 +93,17 @@ and "hobbies" sections might look like:
 ```html
 <!-- my_resume/templates/_hobbies.html.erb -->
 <ul>
-  <% info.points.each do |point| %>
+  <% points.each do |point| %>
     <li><%= point %></li>
   <% end %>
 </ul>
 ```
 
-The data in `resume.rb` needs to be defined, which is what the
-`my_resume/data/sections` directory is for. Each section is a class that
-inherits from `Resulang::Section`. A section class declares the fields a
-section can have as well as their types. The `Personal` and `Hobbies` sections
-would look like this:
-
-```ruby
-# my_resume/data/sections/personal.rb
-class Personal < Resulang::Section
-  string :name, :phone
-  email  :email
-  link   :github
-end
-```
-
-```ruby
-# my_resume/data/sections/hobbies.rb
-class Hobbies < Resulang::Section
-  pointlist :info
-end
-```
-
 To easily view changes to the resume as you make them, you can run a local
 server with:
 ```sh
-resulang server
+bundle exec resulang server
 ```
-
-However, if you make any changes to the classes in `my_resume/data/sections`
-you must restart the server.
 
 You can put assets like images and stylesheets in directories off `my_resume`,
 like `css` and `images` or `assets/css` and `assets/images`. These can be
@@ -142,9 +111,9 @@ referenced in `resume.html.erb`.
 
 To generate a static html page, run:
 ```sh
-resulang make
+bundle exec resulang make
 ```
 
 This will output `./resume.html`
 
-Please see the `exmaples` directory of this project for a working example.
+Please see the `examples` directory of this project for a working example.

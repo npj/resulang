@@ -52,11 +52,11 @@ module Resulang
       end
 
       def load_resume
-        @resume = Resulang::Dsl.new(resume_path).resume
+        @resume = Resulang::Resume.new(path: resume_path)
       end
 
       def resume_path
-        File.join(path, 'resume.rb')
+        File.join(path, 'resume.yaml')
       end
   end
 end

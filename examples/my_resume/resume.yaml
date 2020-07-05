@@ -1,0 +1,29 @@
+personal:
+  name: Peter Brindisi
+  phone: 555-555-5555
+  email: superduperprivate@example.com
+  github: https://github.com/npj
+
+background:
+  description: >-
+    I am a guy that does things. Things are awesome and they are also cool.
+
+skills:
+  things: ['foo', 'bar', 'baz', 'qux']
+
+hobbies:
+  points:
+    - Reading about Haskell
+    - Evangelizing monads
+    - Making beer
+
+other:
+  things:
+    - name: foo
+      description: foo desc
+
+    - name: bar
+      description: bar desc
+
+    - name: baz
+      description: baz desc

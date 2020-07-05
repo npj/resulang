@@ -1,6 +1,4 @@
 require 'resulang/app'
-require 'resulang/dsl'
-require 'resulang/fields'
 require 'resulang/rendering'
 require 'resulang/resume'
 require 'resulang/section'

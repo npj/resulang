@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = Resulang::VERSION
   spec.authors       = ["Peter Brindisi"]
   spec.email         = ["peter.brindisi+resulang@gmail.com"]
-  spec.summary       = %q{Resulang is a simple DSL to help create html resumes.}
+  spec.summary       = %q{Resulang is a simple tool to help create html resumes.}
   spec.homepage      = "https://github.com/npj/resulang"
   spec.license       = "MIT"
 
@@ -22,7 +22,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency "rack",               "~> 2.1.4"
   spec.add_dependency "mime-types",         "~> 3.0"
 
-  spec.add_development_dependency "bundler", "~> 2.1.4"
-  spec.add_development_dependency "rake",    "~> 12.3.3"
-  spec.add_development_dependency "rspec",   "~> 3.4.0"
+  spec.add_development_dependency "bundler",    "~> 2.1.4"
+  spec.add_development_dependency "rake",       "~> 12.3.3"
+  spec.add_development_dependency "rspec",      "~> 3.4.0"
+  spec.add_development_dependency "pry",        "~> 0.13.0"
 end

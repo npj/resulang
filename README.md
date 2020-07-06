@@ -15,7 +15,7 @@ used to generate other kinds of output in the future, not just html.
 
 Once resulang is installed, create a new resulang app with:
 ```sh
-bundle exec resulang new my_resume --section one two three
+bundle exec resulang new my_resume --sections one two three
 ```
 
 This will generate the basic structure of a resulang app as well as a few key files:

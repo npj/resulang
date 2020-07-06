@@ -20,14 +20,14 @@ bundle exec resulang new my_resume --sections one two three
 
 This will generate the basic structure of a resulang app as well as a few key files:
 
-* `my_resume/data/resume.yaml`
+* `my_resume/resume.yaml`
     
-    This is where you define your resume.
+    This is where you put your resume data.
 
 * `my_resume/templates/resume.html.erb`
 
     This is where you write your resume html which has access to the data in
-my_resume/data/resume.yaml
+my_resume/resume.yaml
 
 
 A resume is broken into named sections. For example:
